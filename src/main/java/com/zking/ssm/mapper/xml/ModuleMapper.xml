@@ -21,6 +21,8 @@
     select <include refid="Base_Column_List"/> from
     module where pid=#{pid}
   </select>
+  <select id="initModule2" resultType="com.zking.ssm.model.module.Module"
+          parameterType="com.zking.ssm.model.module.Module"></select>
 
 
 </mapper>

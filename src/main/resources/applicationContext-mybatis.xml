@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--1、开启注解-->
+    <!--2、引入外部jdbc-->
+    <!--3、配置数据库连接池-->
+    <!--4、spring与mybatis集成-->
+    <!--5、开启注解式事务-->
+    <!--6、开启动态代理-->
+
+
+    <!--1、开启注解-->
+    <!-- 注解驱动 -->
+    <context:annotation-config/>
+    <!-- 用注解方式注入bean，并指定查找范围：com.zking.ssh2及子子孙孙包-->
+    <context:component-scan base-package="com.zking.ssm" use-default-filters="true">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--2、引入外部jdbc-->
+  <!--  <context:property-placeholder location="classpath:jdbc.properties"/>
+-->
+    <!--3、配置数据库连接池-->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--初始连接数-->
+        <property name="initialSize" value="10"/>
+        <!--最大活动连接数-->
+        <property name="maxTotal" value="100"/>
+        <!--最大空闲连接数-->
+        <property name="maxIdle" value="50"/>
+        <!--最小空闲连接数-->
+        <property name="minIdle" value="10"/>
+        <!--设置为-1时，如果没有可用连接，连接池会一直无限期等待，直到获取到连接为止。-->
+        <!--如果设置为N（毫秒），则连接池会等待N毫秒，等待不到，则抛出异常-->
+        <property name="maxWaitMillis" value="-1"/>
+    </bean>
+
+    <!--4、spring与mybatis集成-->
+    <!--1) 创建sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描XxxMapping.xml文件，**任意路径 -->
+        <property name="mapperLocations" value="classpath*:com/zking/ssm/**/mapper/xml/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis.cfg.xml"/>
+        <!-- 指定别名 -->
+        <property name="typeAliasesPackage" value="com/zking/ssm/**/model/**"/>
+
+        <!--配置pagehelper插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
+      <!--  <property name="configurationProperties">
+            <props>
+                &lt;!&ndash; 全局映射器启用缓存 *主要将此属性设置完成即可&ndash;&gt;
+                <prop key="cacheEnabled">true</prop>
+                &lt;!&ndash; 查询时，关闭关联对象即时加载以提高性能 &ndash;&gt;
+                <prop key="lazyLoadingEnabled">false</prop>
+                &lt;!&ndash; 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指 定)，不会加载关联表的所有字段，以提高性能 &ndash;&gt;
+                <prop key="aggressiveLazyLoading">true</prop>
+            </props>
+        </property>-->
+    </bean>
+
+    <!--2) 自动扫描com/zking/oa/**/mapper下的所有XxxMapper接口(其实就是DAO接口)，并实现这些接口，-->
+    <!--   即可直接在程序中使用dao接口，不用再获取sqlsession对象-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--basePackage 属性是映射器接口文件的包路径。-->
+        <!--你可以使用分号或逗号 作为分隔符设置多于一个的包路径-->
+        <property name="basePackage" value="com/zking/ssm/**/mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--5、开启注解式事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!--6、开启动态代理-->
+    <aop:aspectj-autoproxy/>
+</beans>

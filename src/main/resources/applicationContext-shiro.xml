@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--1、配置自定义Reaml-->
+    <bean id="shiroRealm" class="com.zking.ssm.shiro.ShiroRealm">
+        <!--配置Shiro明文密码如何进行加密-->
+        <!--注意：重要的事情说三次~~~~~~此处加密方式要与用户注册时的算法一致 -->
+        <!--注意：重要的事情说三次~~~~~~此处加密方式要与用户注册时的算法一致 -->
+        <!--注意：重要的事情说三次~~~~~~此处加密方式要与用户注册时的算法一致 -->
+        <!--以下三个配置告诉shiro将如何对用户传来的明文密码进行加密-->
+        <property name="credentialsMatcher">
+            <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <!--指定hash算法为MD5-->
+                <property name="hashAlgorithmName" value="md5"/>
+                <!--指定散列次数为1024次-->
+                <property name="hashIterations" value="1024"/>
+                <!--true指定Hash散列值使用Hex加密存. false表明hash散列值用用Base64-encoded存储-->
+                <property name="storedCredentialsHexEncoded" value="true"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!--2、注册安全管理器-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroRealm" />
+    </bean>
+
+    <!--3、配置Shiro核心过滤器-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- Shiro的核心安全接口,这个属性是必须的 -->
+        <property name="securityManager" ref="securityManager" />
+      <!--  &lt;!&ndash; 身份验证失败，跳转到登录页面 &ndash;&gt;
+        <property name="loginUrl" value="/home/index.shtml"/>
+        &lt;!&ndash; 身份验证成功，跳转到指定页面 &ndash;&gt;
+        <property name="successUrl" value="/index.jsp"/>
+        &lt;!&ndash; 权限验证失败，跳转到指定页面 &ndash;&gt;
+        <property name="unauthorizedUrl" value="/user/noauthorizeUrl"/>-->
+        <!-- Shiro连接约束配置,即过滤链的定义 -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--
+                注：anon，authcBasic，auchc，user是认证过滤器
+                    perms，roles，ssl，rest，port是授权过滤器
+                -->
+                <!--anon 表示匿名访问，不需要认证以及授权-->
+                <!--authc表示需要认证 没有进行身份认证是不能进行访问的-->
+                <!--roles[admin]表示角色认证，必须是拥有admin角色的用户才行-->
+                /user/login=anon
+                /book/**=authc
+                /common/**=authc
+                <!-- /css/**               = anon
+                 /images/**            = anon
+                 /js/**                = anon
+                 /                     = anon
+                 /user/logout          = logout
+                 /user/**              = anon
+                 /userInfo/**          = authc
+                 /dict/**              = authc
+                 /console/**           = roles[admin]
+                 /**                   = anon-->
+            </value>
+        </property>
+    </bean>
+
+    <!--4、配置生命周期-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+</beans>

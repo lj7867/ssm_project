@@ -49,7 +49,7 @@ iframe{ position:absolute; height:100%; width:100%; border:none;}
 #lock-box p{ color:#e60000; }
 /*顶部*/
 .header{ z-index:2000;}
-.logo{ color: #fff; float: left; line-height:60px; font-size:20px; padding:0 25px; text-align: center; width:150px;}
+.logo{ color: #fff; float: left; line-height:60px; font-size:15px; padding:0 25px; text-align: center; width:150px;}
 .hideMenu{ float:left; width:20px; height:20px; margin-top:15px; font-size:17px; line-height:20px; text-align:center; padding:5px 5px; color:#fff; background-color:#1AA094; }
 .hideMenu:hover{ color:#fff; }
 .layui-nav cite{ margin-left: 5px;}

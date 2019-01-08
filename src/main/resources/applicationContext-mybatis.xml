@@ -51,7 +51,7 @@
         <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描XxxMapping.xml文件，**任意路径 -->
         <property name="mapperLocations" value="classpath*:com/zking/ssm/**/mapper/xml/*.xml"/>
-        <property name="configLocation" value="classpath:mybatis.cfg.xml"/>
+       <!-- <property name="configLocation" value="classpath:mybatis.cfg.xml"/>-->
         <!-- 指定别名 -->
         <property name="typeAliasesPackage" value="com/zking/ssm/**/model/**"/>
 
@@ -68,6 +68,12 @@
             </array>
         </property>
 
+        <!--驼峰命名法-->
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+            </bean>
+        </property>
       <!--  <property name="configurationProperties">
             <props>
                 &lt;!&ndash; 全局映射器启用缓存 *主要将此属性设置完成即可&ndash;&gt;

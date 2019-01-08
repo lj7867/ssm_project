@@ -8,5 +8,4 @@ import java.util.Map;
 @Repository
 public interface ModuleMapper {
     List<Module> initModule(Module module);
-    List<Module> initModule2(Module module);
 }

@@ -20,13 +20,13 @@
     <!-- 顶部 -->
     <div class="layui-header header">
         <div class="layui-main mag0">
-            <a href="#" class="logo">layuiCMS 2.0</a>
+            <a href="#" class="logo">合创物业管理系统</a>
             <!-- 显示/隐藏菜单 -->
             <a href="javascript:;" class="seraph hideMenu icon-caidan"></a>
             <!-- 顶级菜单 -->
             <ul class="layui-nav mobileTopLevelMenus" mobile>
                 <li class="layui-nav-item" data-menu="contentManagement">
-                    <a href="javascript:;"><i class="seraph icon-caidan"></i><cite>layuiCMS</cite></a>
+                    <a href="javascript:;"><i class="seraph icon-caidan"></i><cite>控制面板</cite></a>
                     <dl class="layui-nav-child">
                         <dd class="layui-this" data-menu="contentManagement"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i><cite>内容管理</cite></a></dd>
                         <dd data-menu="memberCenter"><a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a></dd>
@@ -58,7 +58,7 @@
                     <a href="javascript:;"><i class="seraph icon-lock"></i><cite>锁屏</cite></a>
                 </li>
                 <li class="layui-nav-item" id="userInfo">
-                    <a href="javascript:;"><img src="images/face.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">驊驊龔頾</cite></a>
+                    <a href="javascript:;"><img src="images/face.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">管理员</cite></a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="seraph icon-ziliao" data-icon="icon-ziliao"></i><cite>个人资料</cite></a></dd>
                         <dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="seraph icon-xiugai" data-icon="icon-xiugai"></i><cite>修改密码</cite></a></dd>
@@ -75,17 +75,17 @@
     <div class="layui-side layui-bg-black">
         <div class="user-photo">
             <a class="img" title="我的头像" ><img src="images/face.jpg" class="userAvatar"></a>
-            <p>你好！<span class="userName">驊驊龔頾</span>, 欢迎登录</p>
+            <p>你好！<span class="userName">管理员</span>, 欢迎登录</p>
         </div>
         <!-- 搜索 -->
-        <div class="layui-form component">
+        <%--<div class="layui-form component">
             <select name="search" id="search" lay-search lay-filter="searchPage">
                 <option value="">搜索页面或功能</option>
                 <option value="1">layer</option>
                 <option value="2">form</option>
             </select>
             <i class="layui-icon">&#xe615;</i>
-        </div>
+        </div>--%>
         <div class="navBar layui-side-scroll" id="navBar">
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item layui-this">
@@ -120,7 +120,7 @@
     </div>
     <!-- 底部 -->
     <div class="layui-footer footer">
-        <p><span>copyright @2018 驊驊龔頾</span>　　<a onclick="donation()" class="layui-btn layui-btn-danger layui-btn-sm">捐赠作者</a></p>
+        <p><span>copyright @2019  合创小组</span>　</p>
     </div>
 </div>
 
@@ -130,6 +130,7 @@
 
 <script type="text/javascript" src="${ctx}/js/layui/layui.js"></script>
 <script type="text/javascript" src="${ctx}/js/js/index.js"></script>
+<script type="text/javascript" src="${ctx}/js/js/cache.js"></script>
 
 </body>
 </html>

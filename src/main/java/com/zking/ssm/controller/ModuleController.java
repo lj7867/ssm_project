@@ -42,7 +42,7 @@ public class ModuleController {
             map.put("title",m.getTitle());
             map.put("icon",m.getIcon());
             map.put("href",m.getUrl());
-
+            map.put("spread",false);
             module.setPid(m.getId());
             List<Module> modules = moduleService.initModule(module);
             maps2=new ArrayList<>();
@@ -51,6 +51,7 @@ public class ModuleController {
                 map2.put("title",m2.getTitle());
                 map2.put("icon",m2.getIcon());
                 map2.put("href",m2.getUrl());
+                map.put("spread",false);
                 maps2.add(map2);
                 map.put("children",maps2);
             }

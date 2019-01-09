@@ -8,6 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<script type="text/javascript" src="${ctx}/js/jquery-1.10.2.min.js"></script>
 <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css" media="all" />
 
 <script type="text/javascript" src="${ctx}/js/layui/layui.js"></script>

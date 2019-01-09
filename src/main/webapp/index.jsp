@@ -4,7 +4,7 @@
 <head>
     <%@ include file="common/head.jsp"%>
     <meta charset="utf-8">
-    <title>layui后台管理模板 2.0</title>
+    <title>合创物业管理后台</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -12,8 +12,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="${ctx}/js/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="${ctx}/js/css/index.css" media="all" />
+    <script type="text/javascript" src="${ctx}/js/js/index.js"></script>
+    <script type="text/javascript" src="${ctx}/js/js/cache.js"></script>
 </head>
 <body class="main_body">
 <div class="layui-layout layui-layout-admin">
@@ -128,9 +129,8 @@
 <div class="site-tree-mobile"><i class="layui-icon">&#xe602;</i></div>
 <div class="site-mobile-shade"></div>
 
-<script type="text/javascript" src="${ctx}/js/layui/layui.js"></script>
-<script type="text/javascript" src="${ctx}/js/js/index.js"></script>
-<script type="text/javascript" src="${ctx}/js/js/cache.js"></script>
+
+
 
 </body>
 </html>

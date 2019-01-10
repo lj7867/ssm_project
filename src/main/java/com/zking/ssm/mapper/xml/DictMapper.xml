@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.DictMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.dict.Dict" >
+    <constructor >
+      <idArg column="dict_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dict_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dict_item" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dict_value" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dict_is_edittable" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dict_id, dict_type, dict_item, dict_value, dict_is_edittable
+  </sql>
+
+  <select id="queryDict" resultType="com.zking.ssm.model.dict.Dict"
+          parameterType="com.zking.ssm.model.dict.Dict">
+      SELECT <include refid="Base_Column_List"/>
+    from t_dict where dict_type=#{dictType}
+  </select>
+
+</mapper>

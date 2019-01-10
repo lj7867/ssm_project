@@ -5,6 +5,7 @@ $(function(){
         form =layui.form;
         layer=layui.layer;
         initData();
+        initDict();
     });
 
     $("#add").click(function(){
@@ -13,7 +14,7 @@ $(function(){
             title:'添加常规费项',
             area: ['650px', '500px'],
             type:2,
-            content:'/fx/toAddfx'
+            content:'fx/toAddfx'
         });
     });
 
@@ -35,5 +36,23 @@ function initData(){
             ,{field:'wealth', width:135, title: '财富', sort: true}
         ]]
         ,page: true
+    });
+}
+function initDict() {
+    $.ajax({
+        url:"dict/queryDict",
+        data:{"dictType":"FX"},
+        dataType:"json",
+        type:"post",
+        async:true,
+        success:function(data){
+            var optionType = "<option value=\"0\">请选择收费方式</option>";
+            $.each(data, function(i, x) {
+                optionType += "<option value='" + x.dictValue + "'>"
+                    + x.dictItem + "</option>"
+            });
+            $("select[name=interest]").html(optionType);
+            form.render('select');
+        }
     });
 }

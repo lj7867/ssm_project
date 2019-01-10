@@ -102,7 +102,6 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
             var openTitle = '';
             for (var i = 0; i < menu.length; i++) {
                 openTitle = '';
-                console.log(menu[i].icon);
                 if (menu[i].icon) {
                     if (menu[i].icon.split("-")[0] == 'icon') {
                         openTitle += '<i class="seraph ' + menu[i].icon + '"></i>';

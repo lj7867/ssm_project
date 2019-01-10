@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.LadderMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.fx.Ladder" >
+    <constructor >
+      <idArg column="lid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cost_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="la" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="laa" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="lb" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="lbb" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="lc" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="lcc" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="ld" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ldd" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="le" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="lee" jdbcType="REAL" javaType="java.lang.Float" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    lid, cost_id, la, laa, lb, lbb, lc, lcc, ld, ldd, le, lee
+  </sql>
+
+  <insert id="insert" parameterType="com.zking.ssm.vo.FXvo" >
+    insert into t_ladder (lid, cost_id, la,
+      laa, lb, lbb, lc,
+      lcc, ld, ldd, le,
+      lee)
+    values (#{lid,jdbcType=INTEGER}, #{costId,jdbcType=VARCHAR}, #{la,jdbcType=INTEGER},
+      #{laa,jdbcType=REAL}, #{lb,jdbcType=INTEGER}, #{lbb,jdbcType=REAL}, #{lc,jdbcType=INTEGER},
+      #{lcc,jdbcType=REAL}, #{ld,jdbcType=INTEGER}, #{ldd,jdbcType=REAL}, #{le,jdbcType=INTEGER},
+      #{lee,jdbcType=REAL})
+  </insert>
+
+</mapper>

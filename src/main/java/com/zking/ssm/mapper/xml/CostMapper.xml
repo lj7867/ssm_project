@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.ssm.mapper.CostMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.ssm.model.fx.Cost" >
+    <constructor >
+      <idArg column="cost_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cost_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cost_allow" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cost_stair" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cost_period" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cost_fate" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cost_print" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cost_toll" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cost_money" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="cost_item" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cost_rate" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="cost_exceed" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cost_way" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cost_id, cost_name, cost_allow, cost_stair, cost_period, cost_fate, cost_print, cost_toll, 
+    cost_money, cost_item, cost_rate, cost_exceed, cost_way,zssyl
+  </sql>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="costId" parameterType="com.zking.ssm.vo.FXvo" >
+    insert into cost (cost_id, cost_name, cost_allow, 
+      cost_stair, cost_period, cost_fate, 
+      cost_print, cost_toll, cost_money, 
+      cost_item, cost_rate, cost_exceed, 
+      cost_way,zssyl)
+    values (#{costId,jdbcType=VARCHAR}, #{costName,jdbcType=VARCHAR}, #{costAllow,jdbcType=VARCHAR}, 
+      #{costStair,jdbcType=VARCHAR}, #{costPeriod,jdbcType=INTEGER}, #{costFate,jdbcType=INTEGER}, 
+      #{costPrint,jdbcType=VARCHAR}, #{costToll,jdbcType=VARCHAR}, #{costMoney,jdbcType=REAL}, 
+      #{costItem,jdbcType=VARCHAR}, #{costRate,jdbcType=REAL}, #{costExceed,jdbcType=INTEGER}, 
+      #{costWay,jdbcType=VARCHAR},#{zssyl})
+  </insert>
+
+
+
+</mapper>

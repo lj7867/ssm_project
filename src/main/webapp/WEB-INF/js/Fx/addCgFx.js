@@ -15,7 +15,6 @@ $(function(){
             }else{
                 document.getElementById("jt").style.display="none";
             }
-            console.log(value);
         });
         form.on('select(aihao)', function(data){
             /*console.log(data.elem); //得到select原始DOM对象
@@ -36,7 +35,7 @@ $(function(){
             return false;
         });
         $("#sub").click(function(){
-            alert("添加成功");
+            layer.alert("添加成功");
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
             parent.layer.close(index); //再执行关闭    var index = layer.open();
         });

@@ -1,20 +1,21 @@
 package com.zking.ssm.controller;
 
 
+import com.github.pagehelper.Page;
+import com.zking.ssm.model.fx.Cost;
 import com.zking.ssm.service.cost.CostService;
 import com.zking.ssm.service.cost.LadderService;
+import com.zking.ssm.util.PageBean;
 import com.zking.ssm.vo.FXvo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/fx")
@@ -72,6 +73,20 @@ public class FxController {
         }
         return map;
        // return null;
+    }
+
+    @RequestMapping("/queryCostPage")
+    @ResponseBody
+    public Map<String,Object> queryCostPage(Cost cost, HttpServletRequest req){
+        PageBean pageBean = new PageBean();
+        pageBean.setRequest(req);
+        List<Cost> costs = costService.queryCostPager(cost,pageBean);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("code", 0);
+        map.put("msg", "");
+        map.put("count", pageBean.getTotal());
+        map.put("data", costs);
+        return map;
     }
 
 }

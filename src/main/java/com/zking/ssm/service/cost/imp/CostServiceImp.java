@@ -5,6 +5,7 @@ import com.zking.ssm.mapper.LadderMapper;
 import com.zking.ssm.model.fx.Cost;
 import com.zking.ssm.model.fx.Ladder;
 import com.zking.ssm.service.cost.CostService;
+import com.zking.ssm.util.PageBean;
 import com.zking.ssm.vo.FXvo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CostServiceImp implements CostService {
@@ -22,8 +24,13 @@ public class CostServiceImp implements CostService {
     @Transactional(readOnly = false)
     @Override
     public int insert(FXvo record) {
-
         return costMapper.insert(record);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Cost> queryCostPager(Cost cost, PageBean pageBean){
+        return costMapper.queryCostPager(cost);
     }
 
 }

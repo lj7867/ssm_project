@@ -31,5 +31,16 @@
       #{lcc,jdbcType=REAL}, #{ld,jdbcType=INTEGER}, #{ldd,jdbcType=REAL}, #{le,jdbcType=INTEGER},
       #{lee,jdbcType=REAL})
   </insert>
+  <update id="editLadder" parameterType="com.zking.ssm.vo.FXvo">
+      update t_ladder set la=#{la},
+      laa=#{laa}, lb=#{lb}, lbb=#{lbb}, lc=#{lc},
+      lcc=#{lcc}, ld=#{ld}, ldd=#{ldd}, le=#{le},
+      lee=#{lee} where cost_id=#{costId}
+
+  </update>
+  <delete id="delLadder" parameterType="com.zking.ssm.vo.FXvo">
+    DELETE FROM t_ladder where cost_id=#{costId}
+
+  </delete>
 
 </mapper>

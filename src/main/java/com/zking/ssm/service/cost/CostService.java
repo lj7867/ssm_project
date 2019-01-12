@@ -7,10 +7,15 @@ import com.zking.ssm.vo.FXvo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CostService {
 
     int insert(FXvo record);
-    List<Cost> queryCostPager(Cost cost, PageBean pageBean);
 
+    List<Map<String,Object>> queryCostPager(Cost cost, PageBean pageBean);
+
+    Map<String,Object> querySimgleCost(Cost cost);
+
+    int editCgFx(FXvo fXvo);
 }

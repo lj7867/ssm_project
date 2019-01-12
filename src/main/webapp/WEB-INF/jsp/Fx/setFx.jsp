@@ -4,21 +4,24 @@
 <head>
     <title>添加常规费项</title>
     <%@include file="/common/head.jsp"%>
-    <script type="text/javascript" src="${ctx}/js/Fx/addCgFx.js"></script>
+
 </head>
 <body>
-    <form method="post" action="javascript:addCgfx()" class="layui-form" lay-filter="f" id="f">
+    <form method="post" action="javascript:editCgfx()" class="layui-form" lay-filter="form" id="f">
         <div class="layui-form">
             <table class="layui-table">
                 <tr>
                     <td><font color="red" size="5">*</font>费项名称:</td>
-                    <td><input type="text" class="layui-input" name="costName"></td>
+                    <td>
+                        <input id="costName" type="text" class="layui-input" name="costName">
+                        <input id="costId" type="hidden" class="layui-input" name="costId">
+                    </td>
                 </tr>
                 <tr >
                     <td><font color="red" size="5">*</font>收费方式:</td>
                     <td>按
                         <div class="layui-input-block" style="width: 150px;margin-left: 17px;margin-top: -25px">
-                            <select name="costToll" lay-filter="aihao" id="sf">
+                            <select name="costToll" lay-filter="aihao" id="sf" disabled="disabled">
                             </select>
                         </div>
                         <div style="margin-left: 180px;margin-top: -30px;width: 50px;">，每隔</div>
@@ -166,5 +169,6 @@
             </table>
         </div>
     </form>
+    <script type="text/javascript" src="${ctx}/js/Fx/setCgFx.js"></script>
 </body>
 </html>

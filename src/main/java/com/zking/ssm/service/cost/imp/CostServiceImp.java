@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CostServiceImp implements CostService {
@@ -29,8 +30,20 @@ public class CostServiceImp implements CostService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Cost> queryCostPager(Cost cost, PageBean pageBean){
+    public List<Map<String,Object>> queryCostPager(Cost cost, PageBean pageBean){
         return costMapper.queryCostPager(cost);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Map<String, Object> querySimgleCost(Cost cost) {
+        return costMapper.querySimgleCost(cost);
+    }
+
+    @Transactional(readOnly = false)
+    @Override
+    public int editCgFx(FXvo fXvo) {
+        return costMapper.editCgFx(fXvo);
     }
 
 }

@@ -7,5 +7,8 @@ public interface LadderService {
 
     int insert(FXvo record);
 
+    int editLadder(FXvo fXvo);
+
+    int delLadder(FXvo fXvo);
 
 }

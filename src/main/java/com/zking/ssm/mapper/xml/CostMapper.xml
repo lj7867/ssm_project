@@ -35,16 +35,30 @@
       #{costItem,jdbcType=VARCHAR}, #{costRate,jdbcType=REAL}, #{costExceed,jdbcType=INTEGER}, 
       #{costWay,jdbcType=VARCHAR},#{zssyl})
   </insert>
-    <select id="queryCostPager" resultType="com.zking.ssm.model.fx.Cost"
-            parameterType="com.zking.ssm.model.fx.Cost">
-      SELECT  <include refid="Base_Column_List"/>
-      from cost where 1=1
-      <if test="null!=costToll and ''!=costToll">
-          cost_toll=#{costToll}
-      </if>
+  <update id="editCgFx" parameterType="com.zking.ssm.vo.FXvo">
+    update cost set cost_name=#{costName},zssyl=#{zssyl},cost_stair=#{costStair},cost_money=#{costMoney},
+    cost_rate=#{costRate},cost_exceed=#{costExceed} where cost_id=#{costId}
+</update>
+  <select id="queryCostPager" resultType="map" parameterType="com.zking.ssm.model.fx.Cost">
+        SELECT c.`cost_id`,c.`cost_name`,c.`cost_stair`,c.`cost_period`,
+        c.`cost_fate`,d.`dict_item` AS costToll,c.`cost_money`,c.`cost_rate`,
+        c.`cost_exceed`,c.`zssyl` FROM cost c,t_dict d WHERE c.`cost_toll`=d.`dict_value`
+        <if test="null!=costToll and 0!=costToll.length()">
+          AND d.`dict_value`=#{costToll}
+        </if>
+        ORDER BY c.`createdate` desc
 
-
-    </select>
+  </select>
+  <select id="querySimgleCost" resultType="map" parameterType="com.zking.ssm.model.fx.Cost">
+      SELECT c.`cost_id`,c.`cost_name`,c.`cost_stair`,c.`cost_period`,
+      c.`cost_rate`,c.`cost_exceed`,c.`cost_money`,c.`cost_toll`,d.`dict_item`,
+      l.`la`,l.`laa`,l.`lb`,l.`lbb`,l.`lc`,l.`lcc`,l.`ld`,l.`ldd`,l.`le`,l.`lee`,c.zssyl FROM cost c
+      INNER JOIN t_dict d
+      ON c.`cost_toll`=d.`dict_value`
+      LEFT JOIN t_ladder l
+      ON c.`cost_id`=l.`cost_id`
+      WHERE c.`cost_id`=#{costId}
+  </select>
 
 
 </mapper>

@@ -49,14 +49,21 @@ public class FxController {
         return "/Fx/addFx";
     }
 
+    @RequestMapping("/toSetfx")
+    public String tosetFx(){
+        return "/Fx/setFx";
+    }
+
 
 
 
     @RequestMapping("/addCgFx")
     @ResponseBody
     public Map<String,Object> addCgfx(FXvo fXvo){
+        System.out.println("收费周期="+fXvo.getCostId());
         fXvo.setCostId(UUID.randomUUID().toString().replace("-",""));
         fXvo.setCostWay("cg");
+
         int insert = costService.insert(fXvo);
         if (fXvo.getCostStair().equals("jt")){
             ladderService.insert(fXvo);
@@ -80,13 +87,73 @@ public class FxController {
     public Map<String,Object> queryCostPage(Cost cost, HttpServletRequest req){
         PageBean pageBean = new PageBean();
         pageBean.setRequest(req);
-        List<Cost> costs = costService.queryCostPager(cost,pageBean);
+        List<Map<String,Object>> costs = costService.queryCostPager(cost,pageBean);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 0);
         map.put("msg", "");
         map.put("count", pageBean.getTotal());
         map.put("data", costs);
         return map;
+    }
+
+
+    @RequestMapping("/querySingleCost")
+    @ResponseBody
+    public Map<String,Object> querySingleCost(Cost cost){
+        String costId = cost.getCostId();
+        //System.out.println("id"+costId);
+        Map<String, Object> map = costService.querySimgleCost(cost);
+        return map;
+    }
+
+    @RequestMapping("/editCgFx")
+    @ResponseBody
+    public Map<String,Object> editCgfx(FXvo fXvo){
+        Cost cost = new Cost();
+        cost.setCostId(fXvo.getCostId());
+        Map<String, Object> maps = costService.querySimgleCost(cost);
+
+        int insert = costService.editCgFx(fXvo);
+
+        System.out.println("lee==="+fXvo.getLee());
+
+        /*
+        * jt=jt dj=jt
+        * jt=dj
+        * */
+
+
+
+        if(!maps.get("cost_stair").toString().equals(fXvo.getCostStair())
+                && fXvo.getCostStair().equals("jt")){
+                //改为阶梯计算
+            System.out.println("改为阶梯计算");
+            ladderService.insert(fXvo);
+        }
+        if(maps.get("cost_stair").toString().equals("jt") && fXvo.getCostStair().equals("jt")){
+            //改为阶梯计算
+            System.out.println("直接修改阶梯计算");
+            ladderService.editLadder(fXvo);
+        }
+        if(!maps.get("cost_stair").toString().equals(fXvo.getCostStair())
+                && fXvo.getCostStair().equals("dj")){
+            System.out.println("删除阶梯价格，改为单价计算");
+                //删除阶梯价格，改为单价计算
+            ladderService.delLadder(fXvo);
+        }
+
+        Map<String,Object> map = new HashMap<>();
+        boolean b = true;
+        if(insert>=1){
+            map.put("success",b);
+            map.put("message","修改成功");
+        }else{
+            b=false;
+            map.put("success",b);
+            map.put("message","修改失败");
+        }
+        return map;
+        // return null;
     }
 
 }

@@ -10,7 +10,7 @@
     <div class="layui-form" style="margin-left: -30px;margin-top: 5px">
         <label class="layui-form-label">收费方式:</label>
         <div class="layui-input-block" style="width: 150px">
-            <select name="interest" lay-filter="aihao">
+            <select name="interest" id="sf" lay-filter="aihao">
             </select>
         </div>
     </div>
@@ -21,7 +21,7 @@
     </div>
 
 
-    <table class="layui-hide" id="test"></table>
+    <table class="layui-hide" id="test" lay-filter="tb"></table>
 
 </body>
 </html>

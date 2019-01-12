@@ -4,6 +4,54 @@ $(function(){
         table = layui.table;
         form =layui.form;
         layer=layui.layer;
+        //先加载，方便下面初始化form给下拉从新赋值
+        initDict();
+        var id= sessionStorage.getItem("id");
+
+        $.ajax({
+           url:'fx/querySingleCost',
+           data:{"costId":id},
+           dataType:'json',
+           type:'post',
+           async:true,
+            success:function(data){
+                //console.log(data);
+                /*$("#sf").val("cost_toll");
+                form.render('select');*/
+                if('syl'==data.cost_toll){
+                    document.getElementById("zs").style.display="";
+                }else{
+                    document.getElementById("zs").style.display="none";
+                    document.getElementById("jt").style.display="none";
+                }
+                if('jt'==data.cost_stair){
+                    document.getElementById("jt").style.display="";
+                }else{
+                    document.getElementById("jt").style.display="none";
+                }
+                form.val("form",{
+                    "costName":data.cost_name,
+                    "costToll":data.cost_toll,
+                    "zssyl":data.zssyl,
+                    "jg":data.cost_stair,
+                    "costStair":data.cost_stair,
+                    "la":data.la,
+                    "laa":data.laa,
+                    "lb":data.lb,
+                    "lbb":data.lbb,
+                    "lc":data.lc,
+                    "lcc":data.lcc,
+                    "ld":data.ld,
+                    "ldd":data.ldd,
+                    "le":data.le,
+                    "lee":data.lee,
+                    "costMoney":data.cost_money,
+                    "costRate":data.cost_rate,
+                    "costExceed":data.cost_exceed
+                });
+
+            }
+        });
 
         form.on('radio(r)', function(data){
             /*console.log(data.elem); //得到radio原始DOM对象
@@ -16,6 +64,7 @@ $(function(){
                 document.getElementById("jt").style.display="none";
             }
         });
+
         form.on('select(aihao)', function(data){
             /*console.log(data.elem); //得到select原始DOM对象
             console.log(data.value); //得到被选中的值
@@ -27,25 +76,22 @@ $(function(){
                 document.getElementById("zs").style.display="none";
                 document.getElementById("jt").style.display="none";
             }
-
         });
         $("#close").click(function(){
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
             parent.layer.close(index); //再执行关闭    var index = layer.open();
             return false;
         });
-
-
-        initDict();
     });
 
 });
-function addCgfx(){
+
+function editCgfx(){
     $("#costPeriod").removeAttr("disabled");
     var da=$("#f").serialize();
     console.log(da);
     $.ajax({
-        url:"fx/addCgFx",
+        url:"fx/editCgFx",
         data:da,
         dataType:"json",
         type:"post",
@@ -60,7 +106,6 @@ function addCgfx(){
         }
     });
 }
-
 function initDict() {
     $.ajax({
         url:"dict/queryDict",

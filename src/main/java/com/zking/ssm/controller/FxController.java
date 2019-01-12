@@ -54,15 +54,16 @@ public class FxController {
         return "/Fx/setFx";
     }
 
-
+    @RequestMapping("/toAddGtfx")
+    public String toaddGtFx(){
+        return "/Fx/addGtFx";
+    }
 
 
     @RequestMapping("/addCgFx")
     @ResponseBody
     public Map<String,Object> addCgfx(FXvo fXvo){
-        System.out.println("收费周期="+fXvo.getCostId());
         fXvo.setCostId(UUID.randomUUID().toString().replace("-",""));
-        fXvo.setCostWay("cg");
 
         int insert = costService.insert(fXvo);
         if (fXvo.getCostStair().equals("jt")){
@@ -87,6 +88,8 @@ public class FxController {
     public Map<String,Object> queryCostPage(Cost cost, HttpServletRequest req){
         PageBean pageBean = new PageBean();
         pageBean.setRequest(req);
+
+        System.out.println(cost.getCostWay()+"费项");
         List<Map<String,Object>> costs = costService.queryCostPager(cost,pageBean);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 0);

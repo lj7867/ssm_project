@@ -2,9 +2,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>添加常规费项</title>
+    <title>添加公摊费项</title>
     <%@include file="/common/head.jsp"%>
-    <script type="text/javascript" src="${ctx}/js/Fx/addCgFx.js"></script>
+    <script type="text/javascript" src="${ctx}/js/Fx/addGtFx.js"></script>
 </head>
 <body>
     <form method="post" action="javascript:addCgfx()" class="layui-form" lay-filter="f" id="f">
@@ -14,7 +14,7 @@
                     <td><font color="red" size="5">*</font>费项名称:</td>
                     <td>
                         <input type="text" class="layui-input" name="costName">
-                        <input type="hidden" class="layui-input" name="costWay" value="cg">
+                        <input type="hidden" class="layui-input" name="costWay" value="gt">
                     </td>
                 </tr>
                 <tr >

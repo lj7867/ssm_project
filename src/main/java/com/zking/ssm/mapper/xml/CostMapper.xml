@@ -46,7 +46,8 @@
         <if test="null!=costToll and 0!=costToll.length()">
           AND d.`dict_value`=#{costToll}
         </if>
-        ORDER BY c.`createdate` desc
+      AND c.`cost_way`=#{costWay}
+      ORDER BY c.`createdate` desc
 
   </select>
   <select id="querySimgleCost" resultType="map" parameterType="com.zking.ssm.model.fx.Cost">
